@@ -3,23 +3,7 @@ const products = [...document.querySelectorAll('.product')]
 const basket = document.querySelector('.cart__products')
 const cart = document.querySelector('.cart')
 
-//for (let i = 0; i < product.length; i++){
-
-//    add[i].addEventListener('click', () => {
-//        const card__product = document.createElement('div')
-//        card__product.className = 'cart__product'
-//        card__product.setAttribute('data-id', i+1)
-//        card__product.innerHTML =`<img class="cart__product-image" 
-//        src="${product[i].childNodes[3].src}">
-//        <div class="cart__product-count">${val[i].textContent}</div>`
-//
-//        basket.appendChild(card__product)
-//    })
-//}
-
-products.forEach( (product, index) => {
-    console.log(product)
-    console.log(index)
+products.forEach( (product) => {
 
     const dec = product.querySelector('.product__quantity-control_dec')
     const inc = product.querySelector('.product__quantity-control_inc')
@@ -45,9 +29,19 @@ products.forEach( (product, index) => {
             inBasket.className = 'cart__product'
             inBasket.dataset.id = product.dataset.id
             inBasket.innerHTML = `<img class="cart__product-image" 
-            src="${img}">
+            src="${img}">  
             <div class="cart__product-count">${val.textContent}</div>`
             basket.appendChild(inBasket)
+
+            inBasket.addEventListener('click', () => {
+                inBasket.remove();
+                if (!basket.children.length){
+                    cart.style.display = "none"
+                }
+            })
+        }
+        if (basket.children.length){
+            cart.style.display = "block"
         }
     })
 })
