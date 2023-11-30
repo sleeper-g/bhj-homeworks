@@ -1,20 +1,29 @@
-const elems = Array.from(document.querySelectorAll('.has-tooltip'))
+const elems = [...document.querySelectorAll('.has-tooltip')]
 
 elems.forEach( (el) => {
-    const extra = document.createElement('div')
-    extra.classList.add('tooltip')
-    extra.innerText = el.title
-    extra.style.left = elems[elems.indexOf(el)].getBoundingClientRect().left + 'px'
-    el.appendChild(extra)
+  const extra = document.createElement('div')
+  extra.className = 'tooltip'
+  extra.innerText = el.title
+  extra.style.left = elems[elems.indexOf(el)].getBoundingClientRect().left + 'px'
+  el.insertAdjacentElement('afterend', extra)
 })
 
 const tips = Array.from(document.querySelectorAll('.tooltip'))
 
-elems.forEach( (el) => {
-    el.addEventListener('click', (elChlick) => {
-        elChlick.preventDefault();
-        //const steck = tips.filter( (some) => (some.classList.contains('tooltip_active')) )
-        //if (steck.length < 2 || steck.in)
-        tips[elems.indexOf(el)].classList.toggle('tooltip_active')
-    })
+elems.forEach( (el, index) => {
+  el.addEventListener('click', (elChlick) => {
+    elChlick.preventDefault();
+
+    const active = tips.find(el => el.className === 'tooltip tooltip_active') 
+
+    if (!active){
+      tips[index].classList.toggle('tooltip_active')
+    } else {
+      if (tips.indexOf(active) === index) {
+        active.classList.remove('tooltip_active')
+      } else {
+        active.classList.remove('tooltip_active')
+        tips[index].classList.toggle('tooltip_active')}
+    }
+  })
 })
