@@ -5,7 +5,6 @@ elems.forEach( (el) => {
   extra.className = 'tooltip'
   extra.innerText = el.title
   extra.style.left = elems[elems.indexOf(el)].getBoundingClientRect().left + 'px'
-  extra.style.top = elems[elems.indexOf(el)].getBoundingClientRect().bottom + 'px'
   el.insertAdjacentElement('afterend', extra)
 })
 
