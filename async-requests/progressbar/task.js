@@ -7,7 +7,7 @@ const xhr = new XMLHttpRequest
 form.addEventListener('submit', (e) => {
     e.preventDefault();
     xhr.upload.onprogress = (e) => {
-        progress.value =  e.total / e.loaded
+        progress.value = e.loaded / e.total 
     }
     
     xhr.addEventListener('loadend', () => {
